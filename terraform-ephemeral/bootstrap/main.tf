@@ -22,7 +22,7 @@ variable "aws_region" {
 
 # S3 bucket to hold Terraform remote state
 resource "aws_s3_bucket" "state" {
-  bucket = "terraform-ephemeral-state-bucket"
+  bucket = "terraform-ephemeral-state-358262661731"
 
   tags = {
     Project   = "terraform-ephemeral"

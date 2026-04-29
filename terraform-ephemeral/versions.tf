@@ -9,7 +9,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "terraform-ephemeral-state-bucket"
+    bucket         = "terraform-ephemeral-state-358262661731"
     key            = "terraform-ephemeral/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true

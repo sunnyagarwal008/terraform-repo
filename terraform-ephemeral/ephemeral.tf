@@ -18,12 +18,8 @@ resource "aws_ssm_parameter" "app_api_key" {
   name        = "/${local.prefix}/app-api-key"
   description = "Application API key sourced from Secrets Manager (ephemeral)"
   type        = "SecureString"
-  value       = local.secret_data["api_key"]
-
-  lifecycle {
-    # Ignore future drift — the value is managed externally via Secrets Manager
-    ignore_changes = [value]
-  }
+  value_wo         = local.secret_data["api_key"]
+  value_wo_version = 1
 
   tags = local.common_tags
 }

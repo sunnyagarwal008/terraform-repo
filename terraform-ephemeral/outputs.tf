@@ -27,9 +27,3 @@ output "ssm_config_parameter_name" {
   description = "SSM parameter name for app configuration"
   value       = aws_ssm_parameter.app_config.name
 }
-
-# ephemeral outputs are available during apply but never written to state
-output "secret_version_id" {
-  description = "Version ID of the ephemeral secret (not sensitive, safe to output)"
-  value       = ephemeral.aws_secretsmanager_secret_version.app_config.version_id
-}
