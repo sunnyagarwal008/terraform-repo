@@ -1,0 +1,9 @@
+aws_region   = "us-east-1"
+project_name = "terraform-ephemeral"
+environment  = "dev"
+secret_name  = "terraform-ephemeral/app-config"
+
+tags = {
+  Owner = "your-name"
+  Team  = "platform"
+}
