@@ -5,19 +5,19 @@
 variable "ssm_parameter_count" {
   description = "Number of SSM parameters to create"
   type        = number
-  default     = 500
+  default     = 3500
 }
 
 variable "iam_policy_count" {
   description = "Number of IAM policies to create"
   type        = number
-  default     = 100
+  default     = 600
 }
 
 variable "s3_bucket_count" {
   description = "Number of S3 buckets to create"
   type        = number
-  default     = 50
+  default     = 300
 }
 
 # SSM Parameters (free tier - standard parameters are free)
@@ -109,7 +109,7 @@ resource "aws_s3_bucket_public_access_block" "benchmark" {
 
 # CloudWatch Log Groups (free tier: 5 GB ingestion per month)
 resource "aws_cloudwatch_log_group" "benchmark" {
-  count = 100
+  count = 700
 
   name              = "/aws/${var.project_name}/${var.environment}/benchmark/log-group-${count.index}"
   retention_in_days = 1  # Minimal retention to reduce costs
@@ -122,7 +122,7 @@ resource "aws_cloudwatch_log_group" "benchmark" {
 
 # IAM Roles (free)
 resource "aws_iam_role" "benchmark" {
-  count = 100
+  count = 700
 
   name = "${var.project_name}-${var.environment}-benchmark-role-${count.index}"
 
@@ -145,7 +145,7 @@ resource "aws_iam_role" "benchmark" {
 
 # Attach policies to roles
 resource "aws_iam_role_policy_attachment" "benchmark" {
-  count = 100
+  count = 700
 
   role       = aws_iam_role.benchmark[count.index].name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
@@ -159,9 +159,9 @@ output "benchmark_resource_counts" {
     iam_policies       = var.iam_policy_count
     s3_buckets         = var.s3_bucket_count
     s3_bucket_configs  = var.s3_bucket_count * 3  # versioning, encryption, public access block
-    log_groups         = 100
-    iam_roles          = 100
-    role_attachments   = 100
-    total_resources    = var.ssm_parameter_count + var.iam_policy_count + (var.s3_bucket_count * 4) + 100 + 100 + 100
+    log_groups         = 700
+    iam_roles          = 700
+    role_attachments   = 700
+    total_resources    = var.ssm_parameter_count + var.iam_policy_count + (var.s3_bucket_count * 4) + 700 + 700 + 700
   }
 }
